@@ -1,20 +1,8 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+  "builds": [
+    { "src": "vite.config.ts", "use": "@vercel/static-build", "config": { "distDir": "dist" } }
   ],
-  "buildCommand": "./vercel-build.sh",
-  "installCommand": "npm install --legacy-peer-deps --no-fund",
-  "outputDirectory": "dist",
-  "framework": "vite",
-  "github": {
-    "silent": true
-  },
-  "env": {
-    "NODE_OPTIONS": "--max-old-space-size=4096"
-  },
-  "build": {
-    "env": {
-      "NPM_FLAGS": "--legacy-peer-deps --no-fund"
-    }
-  }
-} 
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}
