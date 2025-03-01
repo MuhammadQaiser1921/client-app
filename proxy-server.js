@@ -7,7 +7,11 @@ const app = express();
 const port = 3001;
 
 // Enable CORS for all routes
-app.use(cors());
+app.use(cors({
+  origin: ['https://client-app-kw2c.vercel.app', 'http://localhost:3000'], 
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Create proxy middleware for Twitter API
 const twitterApiProxy = createProxyMiddleware({
