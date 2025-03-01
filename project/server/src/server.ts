@@ -133,22 +133,7 @@ const cleanupOldTweets = () => {
 setInterval(cleanupOldTweets, 60 * 60 * 1000);
 
 app.use(cors({
-  origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    // Allowed origins
-    const allowedOrigins = [
-      'https://client-app-kw2c.vercel.app', // ✅ Your Vercel frontend
-      'http://localhost:3000' // ✅ Local development (adjust the port if needed)
-    ];
-    
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-
-    callback(new Error('Not allowed by CORS'));
-  },
+  origin: ['https://client-app-kw2c.vercel.app', 'http://localhost:3000'], // ✅ Allow frontend
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
