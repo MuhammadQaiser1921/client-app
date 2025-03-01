@@ -132,22 +132,27 @@ const cleanupOldTweets = () => {
 // Run cleanup every hour
 setInterval(cleanupOldTweets, 60 * 60 * 1000);
 
-// Enable CORS for the frontend
 app.use(cors({
   origin: (origin, callback) => {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     
-    // Check if the origin is a localhost URL with any port
-    if (/^http:\/\/localhost:\d+$/.test(origin)) {
+    // Allowed origins
+    const allowedOrigins = [
+      'https://client-app-kw2c.vercel.app', // ✅ Your Vercel frontend
+      'http://localhost:3000' // ✅ Local development (adjust the port if needed)
+    ];
+    
+    if (allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
-    
+
     callback(new Error('Not allowed by CORS'));
   },
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 
 app.use(express.json());
 
