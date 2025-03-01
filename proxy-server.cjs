@@ -8,7 +8,11 @@ const app = express();
 const port = process.env.PORT || 3002;
 
 // Enable CORS for all routes
-app.use(cors());
+app.use(cors({
+  origin: ['https://client-app-kw2c.vercel.app', 'http://localhost:3000'], 
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Add logging middleware
 app.use((req, res, next) => {
